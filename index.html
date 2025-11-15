@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ms" x-data="{ menuOpen: false, show: false }"
+      x-init="setTimeout(() => { show = true; $refs.bgAudio.muted = false; $refs.bgAudio.play(); }, 500)">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laman Utama - Sabah</title>
+  <meta name="description" content="Laman Informasi Sabah - destinasi pelancongan, peta lokasi, dan sumber rujukan.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 text-gray-800 font-sans transition-colors duration-500">
+
+  <!-- Navigasi -->
+  <nav class="bg-white/70 backdrop-blur-md shadow-md fixed top-0 w-full z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <h1 class="text-2xl font-serif font-bold text-green-700">🌿 LAMAN SABAH</h1>
+      <button @click="menuOpen = !menuOpen" class="md:hidden text-green-600" aria-label="Menu">☰</button>
+      <ul class="hidden md:flex space-x-6 text-sm font-medium">
+        <li><a href="index.html" class="text-green-600 font-semibold" aria-current="page">LAMAN UTAMA</a></li>
+        <li><a href="tempat-menarik.html" class="hover:text-green-600">TEMPAT MENARIK</a></li>
+        <li><a href="peta-lokasi.html" class="hover:text-green-600">PETA LOKASI</a></li>
+        <li><a href="sumber-rujukan.html" class="hover:text-green-600">SUMBER RUJUKAN</a></li>
+      </ul>
+    </div>
+    <div x-show="menuOpen" x-transition class="md:hidden bg-white px-4 py-3 space-y-2 text-sm font-medium">
+      <a href="index.html" class="block text-green-600 font-semibold">LAMAN UTAMA</a>
+      <a href="tempat-menarik.html" class="block hover:text-green-600">TEMPAT MENARIK</a>
+      <a href="peta-lokasi.html" class="block hover:text-green-600">PETA LOKASI</a>
+      <a href="sumber-rujukan.html" class="block hover:text-green-600">SUMBER RUJUKAN</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero-section relative h-[80vh] flex items-center justify-center text-center pt-20">
+    <!-- Gambar latar belakang -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('GambarSabah.png');"></div>
+    <!-- Lapisan kabur -->
+    <div class="absolute inset-0 bg-blue-100/30 backdrop-blur-sm"></div>
+
+    <div x-show="show"
+         x-transition:enter="transition ease-out duration-700"
+         x-transition:enter-start="opacity-0 translate-y-6"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         class="relative z-10 p-6">
+      <div class="bg-gray-800/80 p-6 rounded-lg max-w-lg mx-auto shadow-2xl">
+        <h2 class="text-4xl font-serif font-bold mb-4 text-white">SELAMAT DATANG KE SABAH</h2>
+        <p class="text-gray-200 mb-6">Jelajahi keindahan alam dan budaya yang menakjubkan di Tanah di Bawah Bayu</p>
+        <div x-show="show"
+             x-transition:enter="transition ease-out duration-700 delay-400"
+             x-transition:enter-start="opacity-0 translate-y-6"
+             x-transition:enter-end="opacity-100 translate-y-0">
+          <a href="tempat-menarik.html"
+             class="inline-block bg-blue-500 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-600 transition">
+            Mula Menjelajah
+          </a>
+        </div>
+        <!-- Butang Kawalan Audio -->
+        <div class="mt-6">
+          <button @click="$refs.bgAudio.play()" 
+                  class="bg-green-600 text-white px-4 py-2 rounded-full shadow hover:bg-green-700 transition">
+            🔊 Mainkan Audio Sabah
+          </button>
+        </div>
+      </div>
+      <audio x-ref="bgAudio" autoplay loop muted class="hidden">
+        <source src="sabah.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <!-- Tentang Laman -->
+  <section class="py-16 px-6 text-center bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-serif font-bold mb-10 text-gray-800">Tentang Laman Ini</h2>
+      <p class="text-gray-600 mb-12 max-w-3xl mx-auto">
+        Laman web ini dibangunkan untuk memperkenalkan keindahan dan keunikan negeri <strong>Sabah</strong>
+        kepada dunia. Sabah, yang terletak di bahagian utara Pulau Borneo, terkenal dengan
+        pemandangan alam yang menakjubkan, pantai yang indah, gunung yang menjulang tinggi, dan
+        kepelbagaian budaya yang kaya.
+      </p>
+
+      <!-- Kad Informasi dalam satu baris -->
+      <div class="flex flex-wrap md:flex-nowrap justify-center gap-6 overflow-x-auto px-2">
+        <div class="min-w-[280px] bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105">
+          <p class="text-4xl mb-4">📍</p>
+          <h3 class="text-xl font-semibold mb-2 text-green-700">Tempat Menarik</h3>
+          <p class="text-sm text-gray-500">
+            Terokai destinasi pelancongan yang memukau di Sabah, dari <strong>Gunung Kinabalu</strong>
+            hingga <strong>Pulau Semporna</strong>.
+          </p>
+        </div>
+        <div class="min-w-[280px] bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105">
+          <p class="text-4xl mb-4">🗺️</p>
+          <h3 class="text-xl font-semibold mb-2 text-green-700">Peta Lokasi</h3>
+          <p class="text-sm text-gray-500">
+            Lihat lokasi geografi tempat-tempat menarik di Sabah dengan peta interaktif
+            yang mudah digunakan.
+          </p>
+        </div>
+        <div class="min-w-[280px] bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105">
+          <p class="text-4xl mb-4">🔗</p>
+          <h3 class="text-xl font-semibold mb-2 text-green-700">Sumber Rujukan</h3>
+          <p class="text-sm text-gray-500">
+            Akses maklumat tambahan dan sumber rujukan yang dipercayai tentang negeri Sabah.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-center py-6 text-sm text-gray-300">
+    <div class="max-w-6xl mx-auto">
+      <h3 class="text-lg font-semibold mb-2 text-white">Laman Informasi Di Sabah</h3>
+      <p class="mb-4">Menjelajah Keindahan Tanah di Bawah Bayu</p>
+      <div class="flex justify-center space-x-4 mb-4 text-xs">
+        <a href="index.html" class="text-white font-bold hover:text-green-400">Laman Utama</a>
+        <a href="tempat-menarik.html" class="hover:text-green-400">Tempat Menarik</a>
+        <a href="peta-lokasi.html" class="hover:text-green-400">Peta Lokasi</a>
+        <a href="sumber-rujukan.html" class="hover:text-green-400">Sumber Rujukan</a>
+      </div>
+      <p>© 2025 Laman Informasi Di Sabah. Hak Cipta Terpelihara.</p>
+      <div class="mt-2 text-xs">
+        <a href="mailto:info
